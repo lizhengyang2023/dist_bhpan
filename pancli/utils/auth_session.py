@@ -1,6 +1,6 @@
 
 import requests
-from .api import post_json, missing_cert
+from .api import post_json
 import base64, urllib.parse, re
 
 
@@ -64,7 +64,7 @@ def get_access_token(base_url: str, username: str, password: str, *, verbose=Fal
 
     verbose_print('sending /oauth2/auth')
     verbose_print('')
-    r = session.get(f'{base_url}/oauth2/auth?audience=&client_id=0f4bc444-d39a-4945-84a3-023d1f439148&redirect_uri=anyshare%3A%2F%2Foauth2%2Flogin%2Fcallback&response_type=code&state={state}&scope=offline+openid+all&lang=zh-cn&udids=00-50-56-C0-00-01', verify=missing_cert, allow_redirects=redir)
+    r = session.get(f'{base_url}/oauth2/auth?audience=&client_id=0f4bc444-d39a-4945-84a3-023d1f439148&redirect_uri=anyshare%3A%2F%2Foauth2%2Flogin%2Fcallback&response_type=code&state={state}&scope=offline+openid+all&lang=zh-cn&udids=00-50-56-C0-00-01', verify=True, allow_redirects=redir)
 
     challenge, csrf_token = extract_login_challenge(r.text)
 
